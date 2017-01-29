@@ -9,6 +9,7 @@ import {SignupPage} from "../pages/signup/signup";
 import {AuthService} from "../services/auth-service";
 import {ItemService} from "../services/item-service";
 import {CalculationService} from "../services/calculation-service";
+import {RemovePage} from "../pages/remove/remove";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CalculationService} from "../services/calculation-service";
     AddPage,
     FilterPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    RemovePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +31,8 @@ import {CalculationService} from "../services/calculation-service";
     AddPage,
     FilterPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    RemovePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService]
 })

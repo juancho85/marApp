@@ -4,6 +4,8 @@ import {AddPage} from "../add/add";
 import {ItemService} from "../../services/item-service";
 import {Item} from "../../models/item";
 import {FilterPage} from "../filter/filter";
+import {ModalController, ToastController} from "ionic-angular";
+import {RemovePage} from "../remove/remove";
 
 @Component({
   selector: 'page-home',
@@ -12,15 +14,42 @@ import {FilterPage} from "../filter/filter";
 export class HomePage {
 
   addPage = AddPage;
-  filterPage = FilterPage
+  filterPage = FilterPage;
 
   items: Item[] = [];
 
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService,
+              private modalCtrl: ModalController,
+              private toastCtrl: ToastController) {}
 
   ionViewWillEnter(): void {
-    console.log("ionViewWillEnter");
     this.items = this.itemService.getItems();
+  }
+
+  onDelete(item: Item, index: number) {
+    console.log(item);
+    const modal = this.modalCtrl.create(RemovePage, {
+      item: item,
+      index: index
+    });
+    modal.present();
+    modal.onDidDismiss((didRemove: boolean) => {
+      if(didRemove){
+        this.itemService.deleteItem(index);
+        //update the local reference
+        this.items.splice(index, 1);
+        this.showToast("Elemento borrado");
+      }
+    })
+  }
+
+  private showToast(message: string){
+    const toast = this.toastCtrl.create({
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

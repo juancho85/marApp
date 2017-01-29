@@ -1,0 +1,11 @@
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>¿Realmente Deseas suprimir esta entrada?</ion-card-header>
+    <ion-card-content>
+      <h2><strong>{{item.activity}}</strong> - <em>{{ item.numberOfHours }} hora(s)</em></h2>
+      <p><ion-icon name="calendar"></ion-icon> {{item.eventDate}}</p>
+      <button ion-button color="primary" (click)="onClose(false)">No</button>
+      <button ion-button color="danger" (click)="onClose(true)">Sí</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

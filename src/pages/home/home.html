@@ -21,7 +21,8 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let item of items; let i = index">
-      <p>{{item.activity}}: {{item.numberOfHours}} horas</p>
+      <ion-icon name="trash" item-right (click)="onDelete(item, index)"></ion-icon>
+      <h2>{{item.activity}}: {{item.numberOfHours}} horas</h2>
       <p>{{item.eventDate}}</p>
     </ion-item>
   </ion-list>
