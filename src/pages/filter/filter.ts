@@ -9,10 +9,15 @@ import {CalculationResults} from "../../models/calculation-results";
 export class FilterPage {
 
   calculationResult: CalculationResults;
-  startDate = new Date().toISOString();
-  endDate = new Date().toISOString();
+  startDate: string;
+  endDate: string;
 
-  constructor(private calculationService: CalculationService) {}
+  constructor(private calculationService: CalculationService) {
+    const date = new Date();
+    //set the defaults to first day of the current month and last date of the current month
+    this.endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
+    this.startDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
+  }
 
   onFilter(startDate: any, endDate: any) {
     this.startDate = startDate;
