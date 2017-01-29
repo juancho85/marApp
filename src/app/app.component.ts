@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import {HomePage} from "../pages/home/home";
 import {LoginPage} from "../pages/login/login";
 import {SignupPage} from "../pages/signup/signup";
-import {AuthService} from "../services/authService";
+import {AuthService} from "../services/auth-service";
 
 
 @Component({

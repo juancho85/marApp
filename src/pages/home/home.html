@@ -5,10 +5,24 @@
         <ion-icon name="menu" color="primary"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons right>
+      <button ion-button icon-only [navPush]="filterPage">
+        <ion-icon name="funnel" color="primary"></ion-icon>
+      </button>
+      <button ion-button icon-only [navPush]="addPage">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>Facturación</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Facturación</h2>
+  <ion-list>
+    <ion-item *ngFor="let item of items; let i = index">
+      <p>{{item.activity}}: {{item.numberOfHours}} horas</p>
+      <p>{{item.eventDate}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

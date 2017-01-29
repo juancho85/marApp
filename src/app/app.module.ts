@@ -6,7 +6,9 @@ import {AddPage} from "../pages/add/add";
 import {FilterPage} from "../pages/filter/filter";
 import {LoginPage} from "../pages/login/login";
 import {SignupPage} from "../pages/signup/signup";
-import {AuthService} from "../services/authService";
+import {AuthService} from "../services/auth-service";
+import {ItemService} from "../services/item-service";
+import {CalculationService} from "../services/calculation-service";
 
 @NgModule({
   declarations: [
@@ -29,6 +31,6 @@ import {AuthService} from "../services/authService";
     LoginPage,
     SignupPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService]
 })
 export class AppModule {}

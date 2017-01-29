@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {CalculationService} from "../../services/calculation-service";
+import {CalculationResults} from "../../models/calculation-results";
 
-/*
-  Generated class for the Filter page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-filter',
   templateUrl: 'filter.html'
 })
 export class FilterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  calculationResult: CalculationResults;
+  startDate = new Date().toISOString();
+  endDate = new Date().toISOString();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FilterPage');
+  constructor(private calculationService: CalculationService) {}
+
+  onFilter(startDate: any, endDate: any) {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.calculationResult = this.calculationService.getResultsForDates(startDate, endDate);
   }
 
 }

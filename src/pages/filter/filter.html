@@ -1,18 +1,48 @@
-<!--
-  Generated template for the Filter page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>filter</ion-title>
+    <ion-title>Calcular Resultados</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onFilter(f)">
+    <ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Fecha inicio</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="startDate" [(ngModel)]="startDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Fecha final</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="endDate" [(ngModel)]="endDate"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Calcular</button>
+  </form>
+
+  <ion-card *ngIf="calculationResult">
+    <ion-card-header>{{startDate}} - {{endDate}}</ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="body" item-left large ></ion-icon>
+        <h2>{{calculationResult.patientGrossAmount}} €</h2>
+        <p>{{calculationResult.patientTotalHours}} horas</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="calculator" item-left large ></ion-icon>
+        <h2>{{calculationResult.receptionGrossAmount}} €</h2>
+        <p>{{calculationResult.receptionTotalHours}} horas</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="people" item-left large ></ion-icon>
+        <h2>{{calculationResult.marketingGrossAmount}} €</h2>
+        <p>{{calculationResult.marketingTotalHours}} horas</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NgForm} from "@angular/forms";
+import {ItemService} from "../../services/item-service";
+import {Item} from "../../models/item";
+import {ToastController} from "ionic-angular";
 
-/*
-  Generated class for the Add page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html'
 })
 export class AddPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  numbers: number[] = Array.apply(null, {length: 15}).map(Number.call, Number);
+  itemSuccessfullyAdded = "Elemento añadido correctamente";
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPage');
+  constructor(private itemService: ItemService,
+              private toastCtrl: ToastController) {}
+
+  onAddItem(form: NgForm) {
+    const item = new Item(form.value.activity, form.value.eventDate, form.value.numberOfHours);
+    this.itemService.addItem(item);
+    this.showToast(this.itemSuccessfullyAdded);
+  }
+
+  showToast(message: string){
+    const toast = this.toastCtrl.create({
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
-import {AuthService} from "../../services/authService";
+import {LoadingController, AlertController} from 'ionic-angular';
+import {AuthService} from "../../services/auth-service";
 import {NgForm} from "@angular/forms";
 
-/*
-  Generated class for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

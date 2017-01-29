@@ -1,18 +1,38 @@
-<!--
-  Generated template for the Add page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>add</ion-title>
+    <ion-title>Añadir entrada</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onAddItem(f)">
+    <ion-list>
+        <ion-item>
+          <ion-label fixed>Actividad</ion-label>
+          <ion-select ngModel required name="activity">
+            <ion-option value="Recepcion">Recepción</ion-option>
+            <ion-option value="Paciente">Paciente</ion-option>
+            <ion-option value="Marketing">Marketing</ion-option>
+          </ion-select>
+        </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Número de horas</ion-label>
+        <ion-select ngModel required name="numberOfHours">
+          <ion-option value="0.5">0.5</ion-option>
+          <ion-option *ngFor="let number of numbers" value="{{number+1}}">{{number+1}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="eventDate" [(ngModel)]="eventDate"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Añadir</button>
+  </form>
 
 </ion-content>
