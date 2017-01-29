@@ -25,20 +25,26 @@
   </form>
 
   <ion-card *ngIf="calculationResult">
-    <ion-card-header>{{startDate}} - {{endDate}}</ion-card-header>
+    <ion-card-header>
+      <h2>Totales para el periodo</h2>
+      <p>{{startDate}} - {{endDate}}</p>
+    </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-icon name="body" item-left large ></ion-icon>
+        <h2>Pacientes</h2>
         <h2>{{calculationResult.patientGrossAmount}} €</h2>
         <p>{{calculationResult.patientTotalHours}} horas</p>
       </ion-item>
       <ion-item>
-        <ion-icon name="calculator" item-left large ></ion-icon>
+        <h2>Recepción</h2>
+        <ion-icon name="people" item-left large ></ion-icon>
         <h2>{{calculationResult.receptionGrossAmount}} €</h2>
         <p>{{calculationResult.receptionTotalHours}} horas</p>
       </ion-item>
       <ion-item>
-        <ion-icon name="people" item-left large ></ion-icon>
+        <h2>Marketing</h2>
+        <ion-icon name="calculator" item-left large ></ion-icon>
         <h2>{{calculationResult.marketingGrossAmount}} €</h2>
         <p>{{calculationResult.marketingTotalHours}} horas</p>
       </ion-item>
