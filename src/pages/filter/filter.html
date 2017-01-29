@@ -13,11 +13,11 @@
       <ion-list>
         <ion-item>
           <ion-label fixed>Fecha inicio</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="startDate" [(ngModel)]="startDate"></ion-datetime>
+          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="startDate" [(ngModel)]="startDate"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label fixed>Fecha final</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="endDate" [(ngModel)]="endDate"></ion-datetime>
+          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="endDate" [(ngModel)]="endDate"></ion-datetime>
         </ion-item>
       </ion-list>
     </ion-list>

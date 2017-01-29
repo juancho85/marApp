@@ -9,8 +9,6 @@ export class ItemService {
   }
 
   getItems() {
-    console.log("getItems");
-    console.log(this.items);
     return this.items.slice();
   }
 

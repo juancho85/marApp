@@ -27,7 +27,6 @@ export class HomePage {
   }
 
   onDelete(item: Item, index: number) {
-    console.log(item);
     const modal = this.modalCtrl.create(RemovePage, {
       item: item,
       index: index

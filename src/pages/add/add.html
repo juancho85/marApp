@@ -29,7 +29,7 @@
 
       <ion-item>
         <ion-label>Fecha</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" name="eventDate" [(ngModel)]="eventDate"></ion-datetime>
+        <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="eventDate" [(ngModel)]="eventDate"></ion-datetime>
       </ion-item>
     </ion-list>
     <button ion-button block type="submit" [disabled]="!f.valid">Añadir</button>

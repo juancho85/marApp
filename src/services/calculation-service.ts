@@ -14,11 +14,7 @@ export class CalculationService {
 
   getResultsForDates(startDate: any, endDate: any) {
     const originalItems = this.itemService.getItems();
-    console.log("originalItems");
-    console.log(originalItems);
     this.filteredItems =  this.applyFilterToData(originalItems, startDate, endDate);
-    console.log("filteredItems");
-    console.log(this.filteredItems);
     const patientActivities = this.filteredItems.filter(item => item.activity === 'Paciente');
     const receptionActivities = this.filteredItems.filter(item => item.activity === 'Recepcion');
     const marketingActivities = this.filteredItems.filter(item => item.activity === 'Marketing');
@@ -35,9 +31,8 @@ export class CalculationService {
     return this.results;
   }
 
-  private applyFilterToData(itemsToFilter: Item[], startDate: any, endDate: any): Item[]{
-    return itemsToFilter.filter(item => (Date.parse(item.eventDate)) >= (Date.parse(startDate))
-    && (Date.parse(item.eventDate)) <= (Date.parse(endDate)));
+  private applyFilterToData(itemsToFilter: Item[], startDate: string, endDate: string): Item[]{
+    return itemsToFilter.filter((item: Item) =>  item.eventDate >= startDate && item.eventDate <= endDate);
   }
 
   private getNumberOfHours(items: Item[]){
