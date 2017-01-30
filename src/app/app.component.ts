@@ -24,8 +24,8 @@ export class MyApp {
               private authService: AuthService,
               private menuCtrl: MenuController) {
     firebase.initializeApp({
-      apiKey: "AIzaSyChA5A_kxx6VbMvJ0XmXQZtpciXotHZOss",
-      authDomain: "physed-ef176.firebaseapp.com"
+      apiKey: "AIzaSyB7mA_c5YMqSuX4m_QB4bWSaGzoQskLut0",
+      authDomain: "marapp-e0bd1.firebaseapp.com"
     });
     firebase.auth().onAuthStateChanged(user => {
       if(user) {

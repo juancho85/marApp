@@ -10,6 +10,7 @@ import {AuthService} from "../services/auth-service";
 import {ItemService} from "../services/item-service";
 import {CalculationService} from "../services/calculation-service";
 import {RemovePage} from "../pages/remove/remove";
+import {SaveOptionsPage} from "../pages/save-options/save-options";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {RemovePage} from "../pages/remove/remove";
     FilterPage,
     LoginPage,
     SignupPage,
-    RemovePage
+    RemovePage,
+    SaveOptionsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,7 +34,8 @@ import {RemovePage} from "../pages/remove/remove";
     FilterPage,
     LoginPage,
     SignupPage,
-    RemovePage
+    RemovePage,
+    SaveOptionsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService]
 })
