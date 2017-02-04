@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, AlertController} from 'ionic-angular';
+import {LoadingController, AlertController, NavController} from 'ionic-angular';
 import {AuthService} from "../../services/auth-service";
 import {NgForm} from "@angular/forms";
 
@@ -11,7 +11,8 @@ export class LoginPage {
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController){}
+              private alertCtrl: AlertController,
+              private navCtrl: NavController){}
 
   onLogin(form: NgForm){
     const loading = this.loadingCtrl.create({
@@ -21,6 +22,7 @@ export class LoginPage {
     this.authService.login(form.value.email, form.value.password)
       .then(data => {
         loading.dismiss();
+        this.navCtrl.popToRoot();
       })
       .catch(error => {
         loading.dismiss();

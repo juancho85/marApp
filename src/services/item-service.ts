@@ -14,16 +14,45 @@ export class ItemService {
   constructor(private http: Http,
               private authService: AuthService) {}
 
-  addItem(item: Item) {
+  addItem(item: Item, token: string) {
     this.items.push(item);
+
+    const userId = this.authService.getActiveUser().uid;
+    const url = `${this.baseUrl}/${userId}/items.json?auth=${token}`;
+    return this.http.post(url, {
+      activity: item.activity,
+      eventDate: item.eventDate,
+      numberOfHours: item.numberOfHours
+    })
+      .map((response: Response) => {
+        const data = response.json();
+        item.key = data.name;
+        this.items.push(item);
+        return item;
+      })
+      .catch((error) => {
+        console.error("problem adding the element", error);
+        return null;
+      });
   }
 
   getItems() {
     return this.items.slice();
   }
 
-  deleteItem(index: number) {
-    this.items.splice(index, 1);
+  deleteItem(item: Item, token: string) {
+    const userId = this.authService.getActiveUser().uid;
+    const url = `${this.baseUrl}/${userId}/items/${item.key}.json?auth=${token}`;
+    return this.http.delete(url)
+      .map((response: Response) => {
+        const index = this.items.indexOf(item);
+        this.items.splice(index, 1);
+      })
+      .catch((error) => {
+        console.log("problem deleting element");
+        console.error(error);
+        return error;
+      });
   }
 
   fetchItems(token: string) {
@@ -31,7 +60,15 @@ export class ItemService {
     const url = `${this.baseUrl}/${userId}/items.json?auth=${token}`;
     return this.http.get(url)
       .map((response: Response) => {
-        return response.json();
+        const data = response.json();
+        for (let key in data) {
+          let it: Item = data[key];
+          if(it){
+            console.log(it);
+            this.items.push(new Item(it.activity, it.eventDate, it.numberOfHours, key));
+          }
+        }
+        return this.items;
       })
       .do((ingredients: Item[]) => {
         if(ingredients){
