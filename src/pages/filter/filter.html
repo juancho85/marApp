@@ -26,27 +26,33 @@
 
   <ion-card *ngIf="calculationResult">
     <ion-card-header>
-      <h2>Totales para el periodo</h2>
-      <p>{{startDate}} - {{endDate}}</p>
+      <p><strong>Periodo: </strong>{{startDate}} - {{endDate}}</p>
     </ion-card-header>
     <ion-card-content>
+      <ion-item-divider color="light"><strong>Subtotales</strong></ion-item-divider>
       <ion-item>
-        <ion-icon name="body" item-left large ></ion-icon>
+        <ion-icon name="medkit" item-left large ></ion-icon>
         <h2>Pacientes</h2>
-        <h2>{{calculationResult.patientGrossAmount}} €</h2>
+        <h2>{{calculationResult.patientGrossAmount | currency:'EUR':true}} brutos / {{calculationResult.patientGrossAmount * 0.93 | currency:'EUR':true}} netos</h2>
         <p>{{calculationResult.patientTotalHours}} horas</p>
       </ion-item>
       <ion-item>
         <h2>Recepción</h2>
         <ion-icon name="people" item-left large ></ion-icon>
-        <h2>{{calculationResult.receptionGrossAmount}} €</h2>
+        <h2>{{calculationResult.receptionGrossAmount | currency:'EUR':true}} brutos / {{calculationResult.receptionGrossAmount | currency:'EUR':true}} netos</h2>
         <p>{{calculationResult.receptionTotalHours}} horas</p>
       </ion-item>
       <ion-item>
         <h2>Marketing</h2>
-        <ion-icon name="calculator" item-left large ></ion-icon>
-        <h2>{{calculationResult.marketingGrossAmount}} €</h2>
+        <ion-icon name="pie" item-left large ></ion-icon>
+        <h2>{{calculationResult.marketingGrossAmount | currency:'EUR':true}} brutos / {{calculationResult.marketingGrossAmount | currency:'EUR':true}} netos</h2>
         <p>{{calculationResult.marketingTotalHours}} horas</p>
+      </ion-item>
+      <ion-item-divider color="light"><strong>Total</strong></ion-item-divider>
+      <ion-item>
+        <ion-icon name="cash" item-left large ></ion-icon>
+        <h2>{{calculationResult.patientGrossAmount + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} brutos</h2>
+        <h2>{{calculationResult.patientGrossAmount * 0.93 + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} netos</h2>
       </ion-item>
     </ion-card-content>
   </ion-card>

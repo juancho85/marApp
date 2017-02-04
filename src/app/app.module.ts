@@ -11,6 +11,7 @@ import {ItemService} from "../services/item-service";
 import {CalculationService} from "../services/calculation-service";
 import {RemovePage} from "../pages/remove/remove";
 import {SaveOptionsPage} from "../pages/save-options/save-options";
+import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,6 @@ import {SaveOptionsPage} from "../pages/save-options/save-options";
     RemovePage,
     SaveOptionsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService, { provide: LOCALE_ID, useValue: "es" }]
 })
 export class AppModule {}
