@@ -16,7 +16,7 @@ export class LoginPage {
 
   onLogin(form: NgForm){
     const loading = this.loadingCtrl.create({
-      content: 'Signing you in...'
+      content: 'Autenticándote...'
     });
     loading.present();
     this.authService.login(form.value.email, form.value.password)
@@ -27,7 +27,7 @@ export class LoginPage {
       .catch(error => {
         loading.dismiss();
         const alert = this.alertCtrl.create({
-          title: 'Sign in failed',
+          title: 'Hubo un problema de autenticación...',
           message: error.message,
           buttons: ['Ok']
         });

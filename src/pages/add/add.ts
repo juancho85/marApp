@@ -12,8 +12,8 @@ import {AuthService} from "../../services/auth-service";
 export class AddPage {
 
   numbers: number[] = Array.apply(null, {length: 15}).map(Number.call, Number);
-  itemSuccessfullyAdded = "Elemento añadido correctamente";
-  itemUnsuccessfullyAdded = "El elemento no pudo ser añadido";
+  addItemSucessMessage = "Elemento añadido correctamente";
+  addItemErrorMessage = "El elemento no pudo ser añadido";
 
   constructor(private itemService: ItemService,
               private toastCtrl: ToastController,
@@ -25,16 +25,16 @@ export class AddPage {
         const item = new Item(form.value.activity, form.value.eventDate, form.value.numberOfHours, null);
         this.itemService.addItem(item, token).subscribe((data) => {
           if(!data) {
-            this.showToast(this.itemUnsuccessfullyAdded);
+            this.showToast(this.addItemErrorMessage);
           }
         });
       })
       .catch((error)=>{
         console.error("could not get token", error);
-        this.showToast(this.itemUnsuccessfullyAdded);
+        this.showToast(this.addItemErrorMessage);
       });
 
-    this.showToast(this.itemSuccessfullyAdded);
+    this.showToast(this.addItemSucessMessage);
   }
 
   showToast(message: string){

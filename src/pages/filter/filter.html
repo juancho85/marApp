@@ -13,11 +13,11 @@
       <ion-list>
         <ion-item>
           <ion-label fixed>Fecha inicio</ion-label>
-          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="startDate" [(ngModel)]="startDate"></ion-datetime>
+          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="startDate" date="startDate" [(ngModel)]="startDate"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label fixed>Fecha final</ion-label>
-          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="endDate" [(ngModel)]="endDate"></ion-datetime>
+          <ion-datetime required displayFormat="YYYY/MM/DD" pickerFormat="YYYY/MM/DD" name="endDate" date="endDate" [(ngModel)]="endDate"></ion-datetime>
         </ion-item>
       </ion-list>
     </ion-list>
@@ -56,7 +56,7 @@
         <ion-icon name="cash" item-left large ></ion-icon>
         <h2>{{calculationResult.patientGrossAmount + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} brutos</h2>
         <h2>{{calculationResult.patientGrossAmount * 0.93 + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} netos</h2>
-        <h2>{{calculationResult.patientTotalHours + calculationResult.receptionTotalHours + calculationResult.marketingTotalHours}} horas</h2>
+        <p>{{calculationResult.patientTotalHours + calculationResult.receptionTotalHours + calculationResult.marketingTotalHours}} horas</p>
       </ion-item>
     </ion-card-content>
   </ion-card>

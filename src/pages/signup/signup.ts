@@ -15,7 +15,7 @@ export class SignupPage {
 
   onSignup(form: NgForm){
     const loading = this.loadingCtrl.create({
-      content: 'Signing you up...'
+      content: 'Registrándote...'
     });
     loading.present();
     this.authService.signup(form.value.email, form.value.password)
@@ -25,7 +25,7 @@ export class SignupPage {
       .catch(error => {
         loading.dismiss();
         const alert = this.alertCtrl.create({
-          title: 'Signup failed',
+          title: 'Fallo de registro',
           message: error.message,
           buttons: ['Ok']
         });

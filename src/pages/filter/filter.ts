@@ -18,8 +18,10 @@ export class FilterPage {
   ionViewWillEnter(){
     const date = new Date();
     //set the defaults to first day of the current month and last date of the current month
-    this.endDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() + 1, 0));
     this.startDate = this.formatDate(new Date(date.getFullYear(), date.getMonth(), 1));
+    this.endDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() + 1, 0));
+    console.log(this.startDate);
+    console.log(this.endDate);
   }
 
   onFilter(form: NgForm) {

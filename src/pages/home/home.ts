@@ -38,12 +38,22 @@ export class HomePage {
     if (this.items.length == 0) {
       const activeUser =  this.authService.getActiveUser();
       if(activeUser){
+        const load = this.loadCtrl.create({
+          content: "Recuperando elementos. Por favor espera."
+        });
+        load.present();
         activeUser.getToken()
           .then((token: string) => {
             this.itemService.fetchItems(token)
-              .subscribe((list: Item[]) => this.items = list);
+              .subscribe((list: Item[]) => {
+                this.items = list;
+                load.dismiss();
+              });
           })
-          .catch((error)=> console.error("error fetching elements", error));
+          .catch((error)=> {
+            console.error("error fetching elements", error);
+            load.dismiss();
+          });
       }else{
         this.navCtrl.push(LoginPage);
       }
@@ -67,7 +77,6 @@ export class HomePage {
                   this.showToast("Elemento borrado");
                 },
                 error => {
-                  // loading.dismiss();
                   this.handleError(error.json().error);
                 }
               );
@@ -87,77 +96,9 @@ export class HomePage {
     toast.present();
   }
 
-  onDisplayOptions(event) {
-    const loading = this.loadCtrl.create({
-      content: 'Espera por favor'
-    });
-    const popover = this.popoverCtrl.create(SaveOptionsPage);
-    popover.present({
-      ev: event
-    });
-
-    popover.onDidDismiss(
-      data => {
-        //when clicking outside of the popover
-        if(!data){
-          return;
-        }
-        if(data.action == 'load'){
-          this.saveItems(loading);
-        } else if(data.action == 'store') {
-          this.persistItems(loading);
-        }
-      }
-    );
-
-  }
-
-  private saveItems(loading: Loading) {
-    loading.present();
-    this.authService.getActiveUser().getToken()
-      .then(
-        (token: string) => {
-          this.itemService.fetchItems(token)
-            .subscribe(
-              (list: Item[]) => {
-                if (list) {
-                  this.items = list;
-                } else {
-                  this.items = [];
-                }
-                loading.dismiss();
-              },
-              error => {
-                loading.dismiss();
-                this.handleError(error.json().error);
-              }
-            );
-        }
-      )
-      .catch()
-  }
-
-  private persistItems(loading: Loading) {
-    loading.present();
-    this.authService.getActiveUser().getToken()
-      .then(
-        (token: string) => {
-          this.itemService.persistItems(token)
-            .subscribe(
-              () => loading.dismiss(),
-              error => {
-                this.handleError(error.json().error)
-              }
-            );
-        }
-      )
-      .catch()
-  }
-
-
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
-      title: 'An error occurred',
+      title: 'Ha ocurrido un error',
       message: errorMessage,
       buttons: ['Ok']
     });

@@ -10,7 +10,6 @@ import {AuthService} from "../services/auth-service";
 import {ItemService} from "../services/item-service";
 import {CalculationService} from "../services/calculation-service";
 import {RemovePage} from "../pages/remove/remove";
-import {SaveOptionsPage} from "../pages/save-options/save-options";
 import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
@@ -21,8 +20,7 @@ import { LOCALE_ID } from '@angular/core';
     FilterPage,
     LoginPage,
     SignupPage,
-    RemovePage,
-    SaveOptionsPage
+    RemovePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,8 +33,7 @@ import { LOCALE_ID } from '@angular/core';
     FilterPage,
     LoginPage,
     SignupPage,
-    RemovePage,
-    SaveOptionsPage
+    RemovePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService, { provide: LOCALE_ID, useValue: "es" }]
 })

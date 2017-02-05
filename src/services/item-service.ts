@@ -64,7 +64,6 @@ export class ItemService {
         for (let key in data) {
           let it: Item = data[key];
           if(it){
-            console.log(it);
             this.items.push(new Item(it.activity, it.eventDate, it.numberOfHours, key));
           }
         }
