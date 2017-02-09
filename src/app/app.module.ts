@@ -11,6 +11,7 @@ import {ItemService} from "../services/item-service";
 import {CalculationService} from "../services/calculation-service";
 import {RemovePage} from "../pages/remove/remove";
 import { LOCALE_ID } from '@angular/core';
+import {OrderItemsPipe} from "../pipes/order-items.pipe";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,6 @@ import { LOCALE_ID } from '@angular/core';
     SignupPage,
     RemovePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService, { provide: LOCALE_ID, useValue: "es" }]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, ItemService, CalculationService, { provide: LOCALE_ID, useValue: "es" }, OrderItemsPipe]
 })
 export class AppModule {}

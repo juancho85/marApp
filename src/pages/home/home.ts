@@ -5,19 +5,15 @@ import {ItemService} from "../../services/item-service";
 import {Item} from "../../models/item";
 import {FilterPage} from "../filter/filter";
 import {
-  ModalController, ToastController, LoadingController, PopoverController, AlertController,
-  Loading, NavController
-} from "ionic-angular";
+  ModalController, ToastController, LoadingController,  AlertController } from "ionic-angular";
 import {RemovePage} from "../remove/remove";
-import {SaveOptionsPage} from "../save-options/save-options";
 import {AuthService} from "../../services/auth-service";
-import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage{
 
   addPage = AddPage;
   filterPage = FilterPage;
@@ -28,37 +24,39 @@ export class HomePage {
               private modalCtrl: ModalController,
               private toastCtrl: ToastController,
               private loadCtrl: LoadingController,
-              private popoverCtrl: PopoverController,
               private authService: AuthService,
-              private alertCtrl: AlertController,
-              private navCtrl: NavController) {}
+              private alertCtrl: AlertController) {}
 
-  ionViewWillEnter(): void {
-    this.items = this.itemService.getItems();
-    if (this.items.length == 0) {
-      const activeUser =  this.authService.getActiveUser();
-      if(activeUser){
-        const load = this.loadCtrl.create({
-          content: "Recuperando elementos. Por favor espera."
+
+  ionViewDidLoad(){
+    const activeUser =  this.authService.getActiveUser();
+    if(activeUser) {
+      const load = this.loadCtrl.create({
+        content: "Recuperando elementos - Por favor espera"
+      });
+      load.present();
+      activeUser.getToken()
+        .then((token: string) => {
+          this.itemService.fetchItems(token)
+            .subscribe((list: Item[]) => {
+              this.items = list;
+              load.dismiss();
+            });
+        })
+        .catch((error)=> {
+          console.error("error fetching elements", error);
+          load.dismiss();
         });
-        load.present();
-        activeUser.getToken()
-          .then((token: string) => {
-            this.itemService.fetchItems(token)
-              .subscribe((list: Item[]) => {
-                this.items = list;
-                load.dismiss();
-              });
-          })
-          .catch((error)=> {
-            console.error("error fetching elements", error);
-            load.dismiss();
-          });
-      }else{
-        this.navCtrl.push(LoginPage);
-      }
     }
   }
+
+  ionViewWillEnter(): void {
+    const activeUser =  this.authService.getActiveUser();
+    if(activeUser) {
+      this.itemService.getItems();
+    }
+  }
+
 
   onDelete(item: Item) {
     const modal = this.modalCtrl.create(RemovePage, {

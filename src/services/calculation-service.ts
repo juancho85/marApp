@@ -27,7 +27,7 @@ export class CalculationService {
     const receptionGrossAmount = this.getReceptionGrossAmount(receptionTotalHours);
     const marketingGrossAmount = this.getMarketingGrossAmount(marketingTotalHours);
 
-    this.results = new CalculationResults(patientTotalHours, receptionTotalHours, marketingTotalHours, patientGrossAmount, receptionGrossAmount, marketingGrossAmount);
+    this.results = new CalculationResults(patientTotalHours, receptionTotalHours, marketingTotalHours, patientGrossAmount, receptionGrossAmount, marketingGrossAmount, this.filteredItems);
     return this.results;
   }
 
@@ -38,7 +38,7 @@ export class CalculationService {
   private getNumberOfHours(items: Item[]){
     if(items && items.length > 0){
       return items.map(function(item: Item) {
-        return item.numberOfHours;
+        return Number(item.numberOfHours);
       }).reduce(function(a,b){
         return Number(a)+Number(b);
       });

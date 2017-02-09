@@ -3,6 +3,7 @@ import {AuthService} from "./auth-service";
 import {Http, Response} from "@angular/http";
 import 'rxjs/Rx';
 import {Injectable} from "@angular/core";
+import {OrderItemsPipe} from "../pipes/order-items.pipe";
 
 @Injectable()
 export class ItemService {
@@ -12,11 +13,10 @@ export class ItemService {
   items: Item[] = [];
 
   constructor(private http: Http,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private orderItemsPipe: OrderItemsPipe) {}
 
   addItem(item: Item, token: string) {
-    this.items.push(item);
-
     const userId = this.authService.getActiveUser().uid;
     const url = `${this.baseUrl}/${userId}/items.json?auth=${token}`;
     return this.http.post(url, {
@@ -28,6 +28,7 @@ export class ItemService {
         const data = response.json();
         item.key = data.name;
         this.items.push(item);
+        this.items = this.orderItemsPipe.transform(this.items);
         return item;
       })
       .catch((error) => {
@@ -37,6 +38,7 @@ export class ItemService {
   }
 
   getItems() {
+    this.items = this.orderItemsPipe.transform(this.items);
     return this.items.slice();
   }
 
@@ -56,6 +58,7 @@ export class ItemService {
   }
 
   fetchItems(token: string) {
+    this.items = [];
     const userId = this.authService.getActiveUser().uid;
     const url = `${this.baseUrl}/${userId}/items.json?auth=${token}`;
     return this.http.get(url)
@@ -67,6 +70,7 @@ export class ItemService {
             this.items.push(new Item(it.activity, it.eventDate, it.numberOfHours, key));
           }
         }
+        this.items = this.orderItemsPipe.transform(this.items);
         return this.items;
       })
       .do((ingredients: Item[]) => {

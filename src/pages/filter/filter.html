@@ -54,11 +54,19 @@
       <ion-item-divider color="light"><strong>Total</strong></ion-item-divider>
       <ion-item>
         <ion-icon name="cash" item-left large ></ion-icon>
-        <h2>{{calculationResult.patientGrossAmount + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} brutos</h2>
-        <h2>{{calculationResult.patientGrossAmount * 0.93 + calculationResult.receptionGrossAmount + calculationResult.marketingGrossAmount | currency:'EUR':true}} netos</h2>
-        <p>{{calculationResult.patientTotalHours + calculationResult.receptionTotalHours + calculationResult.marketingTotalHours}} horas</p>
+        <h2>{{totalGrossIncome | currency:'EUR':true}} brutos</h2>
+        <h2>{{totalNetIncome | currency:'EUR':true}} netos</h2>
+        <p>{{totalWorkingHours}} horas</p>
       </ion-item>
     </ion-card-content>
   </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let item of filteredItems">
+      <ion-icon name="trash" item-right (click)="onDelete(item)" color="primary"></ion-icon>
+      <h2>{{item.activity}}: {{item.numberOfHours}} horas</h2>
+      <p>{{item.eventDate}}</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

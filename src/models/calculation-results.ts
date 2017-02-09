@@ -1,4 +1,5 @@
 
+import {Item} from "./item";
 export class CalculationResults {
 
   constructor(public patientTotalHours: number = 0,
@@ -6,6 +7,7 @@ export class CalculationResults {
               public marketingTotalHours: number = 0,
               public patientGrossAmount: number = 0,
               public receptionGrossAmount: number = 0,
-              public marketingGrossAmount: number = 0) {}
+              public marketingGrossAmount: number = 0,
+              public filteredItems: Item[] = []) {}
 
 }
