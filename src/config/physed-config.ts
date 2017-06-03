@@ -18,6 +18,6 @@ export const PhysedConfig: PhysedConfig = {
   eurosSesionTramo2: 14,
   eurosSesionTramo3: 16,
   eurosSesionTramo4: 18,
-  eurosRecepcion: 5,
-  eurosMarketing: 5
+  eurosRecepcion: 7,
+  eurosMarketing: 7
 };
